@@ -12,9 +12,6 @@ build:
 install:
 	./gradlew clean installDist
 
-run:
-	./gradlew run
-
 test:
 	./gradlew test
 
@@ -24,8 +21,11 @@ report:
 lint:
 	./gradlew checkstyleMain checkstyleTest
 
-update-deps:
-	./gradlew useLatestVersions
+start-dist:
+	APP_ENV=production ./build/install/app/bin/app
+
+start:
+	APP_ENV=development ./gradlew run
 
 .PHONY: build
 

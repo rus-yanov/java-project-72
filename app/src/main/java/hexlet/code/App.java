@@ -12,6 +12,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import hexlet.code.controllers.RootController;
+import hexlet.code.controllers.UrlController;
 
 public final class App {
 
@@ -35,7 +36,18 @@ public final class App {
     }
 
     private static void addRoutes(Javalin app) {
+
         app.get("/", RootController.welcome);
+
+        app.routes(() -> {
+            path("urls", () -> {
+                post(UrlController.addUrl);
+                get(UrlController.showUrls);
+                path("{id}", () -> {
+                    get(UrlController.showUrl);
+                });
+            });
+        });
     }
 
     public static Javalin getApp() {
