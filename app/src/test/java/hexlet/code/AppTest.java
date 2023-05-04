@@ -67,13 +67,14 @@ public class AppTest {
     void testUrl() {
 
         HttpResponse<String> response = Unirest
-                .get(baseUrl + "/articles/2")
+                .get(baseUrl + "/articles/1")
                 .asString();
+
         String content = response.getBody();
 
         assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(content).contains("https://ru.hexlet.io");
-        assertThat(content).doesNotContain("https://youtube.com");
+        assertThat(content).contains("https://youtube.com");
+        assertThat(content).doesNotContain("https://ru.hexlet.io");
     }
 
     @Test
