@@ -125,7 +125,7 @@ public class AppTest {
         String content = response.getBody();
 
         assertThat(response.getStatus()).isEqualTo(200);
-        assertThat(content).contains(inputUrl);
+        assertThat(content).doesNotContain(inputUrl);
         assertThat(content).contains("Invalid URL");
 
         Url actualUrl = new QUrl()
