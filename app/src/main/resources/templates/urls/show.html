@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/application.html}">
     <head>
         <meta charset="UTF-8">
         <title>Page analyzer</title>
     </head>
     <section layout:fragment="header">
+        <div class="container-lg mt-5">
+            <h1 th:text="'Page ' + *{name}"></h1>
 
+            <table class="table table-bordered table-hover mt-3">
+                <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td th:text="*{id}"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td th:text="*{name}"></td>
+                </tr>
+                <tr>
+                    <td>Created at</td>
+                    <td th:text="${url.getCreatedAt()}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2 class="mt-5">Checks</h2>
+            <form method="post" th:action="@{/urls/{id}/checks(id=*{id})}">
+                <button type="submit" class="btn btn-primary">Запустить проверку</button>
+            </form>
+
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                <tr>
+                    <th class="col-1">ID</th>
+                    <th class="col-1">Код ответа</th>
+                    <th>title</th>
+                    <th>h1</th>
+                    <th>description</th>
+                    <th class="col-2">Дата проверки</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 </html>
