@@ -22,4 +22,16 @@ public class Url extends Model {
     public Url(String name) {
         this.name = name;
     }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
 }
