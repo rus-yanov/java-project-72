@@ -61,7 +61,7 @@ public class AppTest {
         assertThat(response.getStatus()).isEqualTo(200);
         assertThat(content).contains("https://youtube.com");
         assertThat(content).contains("https://ru.hexlet.io");
-        }
+    }
 
     @Test
     void testUrl() {
