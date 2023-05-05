@@ -12,46 +12,46 @@
 
             <table class="table table-bordered table-hover mt-3">
                 <tbody>
-                <tr>
-                    <td>ID</td>
-                    <td th:text="${url.getId()}"></td>
-                </tr>
-                <tr>
-                    <td>Name</td>
-                    <td th:text="${url.getName()}"></td>
-                </tr>
-                <tr>
-                    <td>Created at</td>
-                    <td th:text="${url.getCreatedAt()}"></td>
-                </tr>
+                    <tr>
+                        <td>ID</td>
+                        <td th:text="${url.getId()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td th:text="${url.getName()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Created at</td>
+                        <td th:text="${#temporals.format(url.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                    </tr>
                 </tbody>
             </table>
 
-            <h2 class="mt-5">Checks</h2>
+            <h2 class="mt-5">Tests</h2>
             <form method="post" th:action="@{/urls/{id}/checks(id=*{id})}">
-                <button type="submit" class="btn btn-primary">Сheck</button>
+                <button type="submit" class="btn btn-primary">Launch test</button>
             </form>
 
             <table class="table table-bordered table-hover mt-3">
                 <thead>
-                <tr>
-                    <th class="col-1">ID</th>
-                    <th class="col-1">Response status code</th>
-                    <th>Title</th>
-                    <th>H1</th>
-                    <th>Description</th>
-                    <th class="col-2">Date of verification</th>
-                </tr>
+                    <tr>
+                        <th class="col-1">ID</th>
+                        <th class="col-1">Response status code</th>
+                        <th>Title</th>
+                        <th>H1</th>
+                        <th>Description</th>
+                        <th class="col-2">Date of the test</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

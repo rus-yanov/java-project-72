@@ -85,6 +85,21 @@ public class UrlController {
         ctx.render("urls/show.html");
     };
 
+    public static Handler urlCheck  = ctx -> {
+
+        long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
+
+        Url url = new QUrl()
+                .id.equalTo(id)
+                .findOne();
+
+        if (url == null) {
+            throw new NotFoundResponse();
+        }
+
+
+    };
+
     public static String parseUrl(String url) throws MalformedURLException {
         if (!url.startsWith("http") || !url.startsWith("https")) {
             return "invalid URL";
