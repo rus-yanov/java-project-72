@@ -1,12 +1,10 @@
 package hexlet.code;
 
-import hexlet.code.domain.UrlCheck;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,8 +16,6 @@ import io.ebean.Database;
 
 import hexlet.code.domain.Url;
 import hexlet.code.domain.query.QUrl;
-
-import java.util.List;
 
 public class AppTest {
 
