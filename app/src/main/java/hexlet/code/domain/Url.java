@@ -41,4 +41,8 @@ public class Url extends Model {
     public Instant getCreatedAt() {
         return this.createdAt;
     }
+
+    public List<UrlCheck> getUrlChecks() {
+        return urlChecks;
+    }
 }
