@@ -8,4 +8,4 @@
 <h2><b>Page analyzer</b></h2>
 </a>
 <p>A full-featured website that analyzes specified pages for SEO suitability!</p>
-<p><b>Stack:</b> Javalin, ORM(ebean), PostgreSQL, Bootstrap, HTML5, CSS3, REST API, JUnit.</p>
+<p><b>Stack:</b> Javalin, ORM(ebean), PostgreSQL, Bootstrap, Thymeleaf, HTML5, CSS3, REST API, JUnit.</p>
