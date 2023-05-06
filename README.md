@@ -7,5 +7,5 @@
 <a href="https://java-project-72-rus-yanov.up.railway.app/">
 <h2><b>Page analyzer</b></h2>
 </a>
-<p>a full-featured website that analyzes specified pages for SEO suitability!</p>
+<p>A full-featured website that analyzes specified pages for SEO suitability!</p>
 <p><b>Stack:</b> Javalin, ORM(ebean), PostgreSQL, Bootstrap, HTML5, CSS3, REST API, JUnit.</p>
