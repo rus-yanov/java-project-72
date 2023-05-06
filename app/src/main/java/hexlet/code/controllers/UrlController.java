@@ -142,6 +142,7 @@ public class UrlController {
         int statusCode = response.getStatus();
         String title = doc.title();
         String h1 = doc.selectFirst("h1").text();
+        // не понятно откуда взять description
         String description = "";
         return new UrlCheck(statusCode, title, h1, description);
     }

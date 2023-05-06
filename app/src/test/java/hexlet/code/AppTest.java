@@ -168,5 +168,6 @@ public class AppTest {
 
         MockWebServer server = new MockWebServer();
 
+        // не понятно как писать тест
     }
 }
