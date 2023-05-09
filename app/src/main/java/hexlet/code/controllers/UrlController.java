@@ -13,6 +13,7 @@ import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -24,29 +25,27 @@ public class UrlController {
 
     public static Handler addUrl = ctx -> {
 
-        String parsedUrl = parseUrl(ctx.formParam("url"));
+        try {
+            String parsedUrl = parseUrl(ctx.formParam("url"));
+            Url url = new QUrl()
+                    .name.equalTo(parsedUrl)
+                    .findOne();
 
-        if (parsedUrl.equals("invalid URL")) {
-            ctx.sessionAttribute("flash", "Invalid URL");
+            if (url == null) {
+                Url newUrl = new Url(parsedUrl);
+                newUrl.save();
+                ctx.sessionAttribute("flash", "Страница успешно добавлена");
+                ctx.sessionAttribute("flash-type", "success");
+                ctx.redirect("/urls");
+            } else {
+                ctx.sessionAttribute("flash", "Страница уже существует");
+                ctx.sessionAttribute("flash-type", "info");
+                ctx.redirect("/urls");
+            }
+        } catch (MalformedURLException e) {
+            ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.redirect("/");
-            return;
-        }
-
-        Url url = new QUrl()
-                .name.equalTo(parsedUrl)
-                .findOne();
-
-        if (url == null) {
-            Url newUrl = new Url(parsedUrl);
-            newUrl.save();
-            ctx.sessionAttribute("flash", "The page has been successfully added");
-            ctx.sessionAttribute("flash-type", "success");
-            ctx.redirect("/urls");
-        } else {
-            ctx.sessionAttribute("flash", "The page already exists");
-            ctx.sessionAttribute("flash-type", "info");
-            ctx.redirect("/urls");
         }
     };
 
@@ -109,10 +108,10 @@ public class UrlController {
             UrlCheck urlCheck = doUrlCheck(url);
             url.getUrlChecks().add(urlCheck);
             url.save();
-            ctx.sessionAttribute("flash", "The page has been successfully added");
+            ctx.sessionAttribute("flash", "Страница успешно добавлена");
             ctx.sessionAttribute("flash-type", "success");
         } catch (UnirestException e) {
-            ctx.sessionAttribute("flash", "Invalid URL");
+            ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
         } catch (Exception e) {
             ctx.sessionAttribute("flash", e.getMessage());
@@ -123,7 +122,7 @@ public class UrlController {
 
     public static String parseUrl(String url) throws MalformedURLException {
         if (!url.startsWith("http") || !url.startsWith("https")) {
-            return "invalid URL";
+            throw new MalformedURLException("invalid URL");
         } else {
             URL wholeUrl = new URL(url);
             return wholeUrl.getProtocol() + "://" + wholeUrl.getAuthority();
@@ -142,8 +141,8 @@ public class UrlController {
         int statusCode = response.getStatus();
         String title = doc.title();
         String h1 = doc.selectFirst("h1").text();
-        // не понятно откуда взять description
-        String description = "";
+        Element descriptionElement = doc.selectFirst("meta[name=description]");
+        String description = descriptionElement == null ? "" : descriptionElement.attr("content");
         return new UrlCheck(statusCode, title, h1, description);
     }
 }
