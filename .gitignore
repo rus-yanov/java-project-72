@@ -11,4 +11,5 @@ bin
 .project*
 .classpath
 .idea/
-
+database.mv.db
+database.trace.db
