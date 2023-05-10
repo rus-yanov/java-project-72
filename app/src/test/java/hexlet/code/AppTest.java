@@ -181,7 +181,7 @@ public class AppTest {
 
     @Test
     void testCheckUrl() {
-        String mockUrl = server.url("/").toString();
+        String mockUrl = server.url("/").toString().replaceAll("/$", "");
 
         HttpResponse responsePost = Unirest
                 .post(baseUrl + "/urls")
