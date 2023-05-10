@@ -37,7 +37,6 @@ public class UrlCheck extends Model {
         this.title = title;
         this.h1 = h1;
         this.description = description;
-        this.url = url;
     }
 
     public long getId() {

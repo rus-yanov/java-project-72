@@ -138,7 +138,10 @@ public class UrlController {
 
         int statusCode = response.getStatus();
         String title = doc.title();
-        String h1 = doc.selectFirst("h1").text();
+
+        Element h1tag = doc.selectFirst("h1");
+        String h1 = h1tag != null ? h1tag.text() : "";
+
         Element descriptionElement = doc.selectFirst("meta[name=description]");
         String description = descriptionElement == null ? "" : descriptionElement.attr("content");
         return new UrlCheck(statusCode, title, h1, description);
