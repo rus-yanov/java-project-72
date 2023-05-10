@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/application.html}">
     <head>
         <meta charset="UTF-8">
-        <title>Page analyzer</title>
+        <title>Анализатор страниц</title>
     </head>
     <section layout:fragment="header">
         <div class="container-lg mt-5">
@@ -17,30 +17,30 @@
                         <td th:text="${url.getId()}"></td>
                     </tr>
                     <tr>
-                        <td>Name</td>
+                        <td>Имя</td>
                         <td th:text="${url.getName()}"></td>
                     </tr>
                     <tr>
-                        <td>Created at</td>
+                        <td>Дата создания</td>
                         <td th:text="${#temporals.format(url.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2 class="mt-5">Tests</h2>
+            <h2 class="mt-5">Проверки</h2>
             <form method="post" th:action="@{/urls/{id}/checks(id=*{id})}">
-                <button type="submit" class="btn btn-primary">Launch test</button>
+                <button type="submit" class="btn btn-primary">Запустить проверку</button>
             </form>
 
             <table class="table table-bordered table-hover mt-3">
                 <thead>
                     <tr>
                         <th class="col-1">ID</th>
-                        <th class="col-1">Response status code</th>
+                        <th class="col-1">Код ответа</th>
                         <th>Title</th>
-                        <th>h1</th>
-                        <th>Description</th>
-                        <th class="col-2">Date of the test</th>
+                        <th>Заголовок</th>
+                        <th>Описание</th>
+                        <th class="col-2">Дата проверки</th>
                     </tr>
                 </thead>
                 <tbody>

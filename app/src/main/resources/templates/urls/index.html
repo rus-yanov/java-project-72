@@ -4,19 +4,19 @@
       layout:decorate="~{layouts/application.html}">
     <head>
         <meta charset="UTF-8">
-        <title>Page analyzer</title>
+        <title>Анализатор страниц</title>
     </head>
     <section layout:fragment="header">
         <div class="container-lg mt-5">
-            <h1>Pages</h1>
+            <h1>Сайты</h1>
 
             <table class="table table-bordered table-hover mt-3">
                 <thead>
                 <tr>
                     <th class="col-1">ID</th>
-                    <th>Name</th>
-                    <th class="col-2">Last check</th>
-                    <th class="col-1">Response status code</th>
+                    <th>Имя</th>
+                    <th class="col-2">Последняя проверка</th>
+                    <th class="col-1">Код ответа</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,13 +37,13 @@
             <nav aria-label="Page navigation" th:if="${#lists.size(pages)}">
                 <ul class="pagination justify-content-center mt-5">
                     <li th:class="'page-item' + ${currentPage <= 1 ? ' disabled' : ''}">
-                        <a class="page-link" th:href="@{/urls(page=${currentPage - 1},term=${term})}">Previous</a>
+                        <a class="page-link" th:href="@{/urls(page=${currentPage - 1},term=${term})}">Назад</a>
                     </li>
                     <li th:each="page : ${pages}" th:class="'page-item' + ${currentPage == page ? ' active' : ''}">
                         <a class="page-link" th:href="@{/urls(page=${page},term=${term})}" th:text="${page}"></a>
                     </li>
                     <li th:class="'page-item' + ${currentPage >= #lists.size(pages) ? ' disabled' : ''}">
-                        <a class="page-link" th:href="@{/urls(page=${currentPage + 1},)}">Next</a>
+                        <a class="page-link" th:href="@{/urls(page=${currentPage + 1},)}">Вперед</a>
                     </li>
                 </ul>
             </nav>
