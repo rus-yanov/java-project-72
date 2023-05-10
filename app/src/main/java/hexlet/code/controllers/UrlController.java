@@ -115,7 +115,7 @@ public class UrlController {
             UrlCheck urlCheck = doUrlCheck(url);
             url.getUrlChecks().add(urlCheck);
             url.save();
-            ctx.sessionAttribute("flash", "Страница успешно добавлена");
+            ctx.sessionAttribute("flash", "Страница успешно проверена");
             ctx.sessionAttribute("flash-type", "success");
         } catch (UnirestException e) {
             ctx.sessionAttribute("flash", "Некорректный URL");
