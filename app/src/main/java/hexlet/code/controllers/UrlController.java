@@ -25,27 +25,34 @@ public class UrlController {
 
     public static Handler addUrl = ctx -> {
 
-        try {
-            String parsedUrl = parseUrl(ctx.formParam("url"));
-            Url url = new QUrl()
-                    .name.equalTo(parsedUrl)
-                    .findOne();
+        String inputUrl = ctx.formParamAsClass("url", String.class).getOrDefault(null);
 
-            if (url == null) {
-                Url newUrl = new Url(parsedUrl);
-                newUrl.save();
-                ctx.sessionAttribute("flash", "Страница успешно добавлена");
-                ctx.sessionAttribute("flash-type", "success");
-                ctx.redirect("/urls");
-            } else {
-                ctx.sessionAttribute("flash", "Страница уже существует");
-                ctx.sessionAttribute("flash-type", "info");
-                ctx.redirect("/urls");
-            }
+        URL newUrl;
+        try {
+            newUrl = new URL(inputUrl);
         } catch (MalformedURLException e) {
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.redirect("/");
+            return;
+        }
+
+        String parsedUrl = newUrl.getProtocol() + "://" + newUrl.getAuthority();
+
+        boolean urlFound = new QUrl()
+                .name.equalTo(parsedUrl)
+                .exists();
+
+        if (urlFound) {
+            ctx.sessionAttribute("flash", "Страница уже существует");
+            ctx.sessionAttribute("flash-type", "info");
+            ctx.redirect("/urls");
+        } else {
+            Url validUrl = new Url(parsedUrl);
+            validUrl.save();
+            ctx.sessionAttribute("flash", "Страница успешно добавлена");
+            ctx.sessionAttribute("flash-type", "success");
+            ctx.redirect("/urls");
         }
     };
 
@@ -119,15 +126,6 @@ public class UrlController {
         }
         ctx.redirect("/urls/" + id);
     };
-
-    public static String parseUrl(String url) throws MalformedURLException {
-        if (!url.startsWith("http") || !url.startsWith("https")) {
-            throw new MalformedURLException("invalid URL");
-        } else {
-            URL wholeUrl = new URL(url);
-            return wholeUrl.getProtocol() + "://" + wholeUrl.getAuthority();
-        }
-    }
 
     public static UrlCheck doUrlCheck(Url url) {
 

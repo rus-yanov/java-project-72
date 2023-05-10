@@ -1,12 +1,15 @@
 package hexlet.code;
 
 import hexlet.code.domain.UrlCheck;
-import okhttp3.mockwebserver.MockResponse;
+import hexlet.code.domain.Url;
+import hexlet.code.domain.query.QUrl;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,9 +18,6 @@ import kong.unirest.Unirest;
 import io.javalin.Javalin;
 import io.ebean.DB;
 import io.ebean.Database;
-
-import hexlet.code.domain.Url;
-import hexlet.code.domain.query.QUrl;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,12 +33,14 @@ public class AppTest {
     private static MockWebServer server;
 
     static String readFile(String fileName) throws IOException {
+
         Path filePath = Paths.get("src", "test", "resources", fileName);
         return Files.readString(filePath);
     }
 
     @BeforeAll
     public static void beforeAll() throws IOException {
+
         app = App.getApp();
         app.start(0);
         int port = app.port();
@@ -53,18 +55,21 @@ public class AppTest {
 
     @AfterAll
     public static void afterAll() throws IOException {
+
         app.stop();
         server.shutdown();
     }
 
     @BeforeEach
     void beforeEach() {
+
         database.script().run("/truncate.sql");
         database.script().run("/seed.sql");
     }
 
     @Test
     void testRoot() {
+
         HttpResponse<String> response = Unirest
                 .get(baseUrl)
                 .asString();
@@ -181,6 +186,7 @@ public class AppTest {
 
     @Test
     void testCheckUrl() {
+
         String mockUrl = server.url("/").toString().replaceAll("/$", "");
 
         HttpResponse responsePost = Unirest
