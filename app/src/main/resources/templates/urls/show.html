@@ -4,11 +4,11 @@
       layout:decorate="~{layouts/application.html}">
     <head>
         <meta charset="UTF-8">
-        <title>Анализатор страниц</title>
+        <title>Проверки</title>
     </head>
     <section layout:fragment="header">
         <div class="container-lg mt-5">
-            <h1 th:text="'Page ' + ${url.getName()}"></h1>
+            <h1 th:text="'Страница ' + ${url.getName()}"></h1>
 
             <table class="table table-bordered table-hover mt-3">
                 <tbody>
@@ -47,9 +47,9 @@
                     <tr th:each="urlCheck : ${urlChecks}" th:object="${urlCheck}">
                         <td th:text="${urlCheck.getId()}"></td>
                         <td th:text="${urlCheck.getStatusCode()}"></td>
-                        <td th:text="${urlCheck.getTitle()}"></td>
-                        <td th:text="${urlCheck.getH1()}"></td>
-                        <td th:text="${urlCheck.getDescription()}"></td>
+                        <td th:text="${#strings.abbreviate(urlCheck.getTitle(), 30)}"></td>
+                        <td th:text="${#strings.abbreviate(urlCheck.getH1(), 30)}"></td>
+                        <td th:text="${#strings.abbreviate(urlCheck.getDescription(), 50)}"></td>
                         <td th:text="${#temporals.format(urlCheck.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
                     </tr>
                 </tbody>

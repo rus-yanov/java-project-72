@@ -4,7 +4,7 @@
       layout:decorate="~{layouts/application.html}">
     <head>
         <meta charset="UTF-8">
-        <title>Анализатор страниц</title>
+        <title>Сайты</title>
     </head>
     <section layout:fragment="header">
         <div class="container-lg mt-5">
@@ -13,23 +13,25 @@
             <table class="table table-bordered table-hover mt-3">
                 <thead>
                 <tr>
-                    <th class="col-1">ID</th>
+                    <th>ID</th>
                     <th>Имя</th>
-                    <th class="col-2">Последняя проверка</th>
-                    <th class="col-1">Код ответа</th>
+                    <th>Последняя проверка</th>
+                    <th>Код ответа</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="url : ${urls}" th:object="${url}">
+                <tr th:each="url : ${urls}"
+                    th:object="${url}">
+
                     <td th:text="*{getId()}"></td>
                     <td>
                         <a th:href="@{/urls/{id}(id=*{getId()})}"
-                           th:text="${#strings.abbreviate(url.getName(), 30)}"
+                           th:text="*{getName()}"
                            style="color: #393E46">
                         </a>
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td th:text="*{getUrlChecks().isEmpty() ? '' : #temporals.format(getUrlChecks().get(getUrlChecks().size() - 1).getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="*{getUrlChecks().isEmpty() ? '' : getUrlChecks().get(getUrlChecks().size() - 1).getStatusCode()}"></td>
                 </tr>
                 </tbody>
             </table>
