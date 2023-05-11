@@ -1,17 +1,17 @@
 package hexlet.code.domain;
 
-import java.time.Instant;
+import io.ebean.Model;
+import io.ebean.annotation.WhenCreated;
+
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
-
-import io.ebean.Model;
-import io.ebean.annotation.WhenCreated;
+import java.time.Instant;
 
 @Entity
-public class UrlCheck extends Model {
+public final class UrlCheck extends Model {
 
     @Id
     @GeneratedValue

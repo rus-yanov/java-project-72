@@ -1,23 +1,19 @@
 package hexlet.code;
 
-import hexlet.code.domain.UrlCheck;
 import hexlet.code.domain.Url;
+import hexlet.code.domain.UrlCheck;
 import hexlet.code.domain.query.QUrl;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import kong.unirest.HttpResponse;
-import kong.unirest.Unirest;
-import io.javalin.Javalin;
 import io.ebean.DB;
 import io.ebean.Database;
+import io.javalin.Javalin;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +21,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class AppTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public final class AppTest {
 
     private static Javalin app;
     private static String baseUrl;
