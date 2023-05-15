@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY /app .
 
-RUN make start-dist
+RUN APP_ENV=production ./build/install/app/bin/app
 
 CMD ./build/install/app/bin/app
