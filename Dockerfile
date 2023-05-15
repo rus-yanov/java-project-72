@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY /app .
 
-RUN APP_ENV=production ./build/install/app/bin/app
+RUN gradle installDist
 
 CMD ./build/install/app/bin/app
